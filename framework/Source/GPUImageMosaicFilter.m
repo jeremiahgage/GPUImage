@@ -27,7 +27,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
      
      vec4 lumcoeff = vec4(0.299,0.587,0.114,0.0);
      
-     vec4 inputColor = texture2D(inputImageTexture2, xy);
+     vec4 inputColor = texture2D(inputImageTexture, xy);
      float lum = dot(inputColor,lumcoeff);
      lum = 1.0 - lum;
      
@@ -41,7 +41,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
      vec2 startCoord = vec2(float(x) *  inputTileSize.x, float(y) * inputTileSize.y);
      vec2 finalCoord = startCoord + ((textureCoordinate - xy) * (inputTileSize / displayTileSize));
      
-     vec4 color = texture2D(inputImageTexture, finalCoord);   
+     vec4 color = texture2D(inputImageTexture2, finalCoord);
      if (colorOn == 1) {
          color = color * inputColor;
      }
@@ -69,7 +69,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
      
      vec4 lumcoeff = vec4(0.299,0.587,0.114,0.0);
      
-     vec4 inputColor = texture2D(inputImageTexture2, xy);
+     vec4 inputColor = texture2D(inputImageTexture, xy);
      float lum = dot(inputColor,lumcoeff);
      lum = 1.0 - lum;
      
@@ -83,7 +83,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
      vec2 startCoord = vec2(float(x) *  inputTileSize.x, float(y) * inputTileSize.y);
      vec2 finalCoord = startCoord + ((textureCoordinate - xy) * (inputTileSize / displayTileSize));
      
-     vec4 color = texture2D(inputImageTexture, finalCoord);
+     vec4 color = texture2D(inputImageTexture2, finalCoord);
      if (colorOn == 1) {
          color = color * inputColor;
      }
@@ -180,7 +180,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
     NSImage *img = [NSImage imageNamed:tileSet];
 #endif
     pic = [[GPUImagePicture alloc] initWithImage:img smoothlyScaleOutput:YES];
-    [pic addTarget:self];
+    [pic addTarget:self atTextureLocation:1];
     [pic processImage];
 }
 
