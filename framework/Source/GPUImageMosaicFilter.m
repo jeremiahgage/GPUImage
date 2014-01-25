@@ -23,16 +23,15 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
  void main()
  {
      vec2 xy = textureCoordinate;
-     xy = xy - mod(xy, displayTileSize);
+     xy = displayTileSize*floor(xy/displayTileSize);//xy - mod(xy, displayTileSize);
      
      vec4 lumcoeff = vec4(0.299,0.587,0.114,0.0);
      
      vec4 inputColor = texture2D(inputImageTexture, xy);
-     float lum = dot(inputColor,lumcoeff);
-     lum = 1.0 - lum;
+     float lum = 1.0 - dot(inputColor,lumcoeff);
      
      float stepsize = 1.0 / numTiles;
-     float lumStep = (lum - mod(lum, stepsize)) / stepsize; 
+     float lumStep = floor(lum/stepsize);//(lum - mod(lum, stepsize)) / stepsize;
   
      float rowStep = 1.0 / inputTileSize.x;
      float x = mod(lumStep, rowStep);
@@ -179,7 +178,7 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
 #else
     NSImage *img = [NSImage imageNamed:tileSet];
 #endif
-    pic = [[GPUImagePicture alloc] initWithImage:img smoothlyScaleOutput:YES];
+    pic = [[GPUImagePicture alloc] initWithImage:img smoothlyScaleOutput:NO];
     [pic addTarget:self atTextureLocation:1];
     [pic processImage];
 }
