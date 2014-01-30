@@ -12,7 +12,9 @@
     }
 
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-    UIImage *image = [UIImage imageNamed:@"lookup_amatorka.png"];
+    NSData *imageFileData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"lookup_amatorka" ofType:@"png"]];
+    UIImage *image = [[UIImage alloc] initWithData:imageFileData];
+//    UIImage *image = [UIImage imageNamed:@"lookup_amatorka.png"];
 #else
     NSImage *image = [NSImage imageNamed:@"lookup_amatorka.png"];
 #endif

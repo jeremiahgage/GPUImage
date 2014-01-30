@@ -174,7 +174,9 @@ NSString *const kGPUImageMosaicFragmentShaderString = SHADER_STRING
 -(void)setTileSet:(NSString *)tileSet
 {
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-    UIImage *img = [UIImage imageNamed:tileSet];
+//    UIImage *img = [UIImage imageNamed:tileSet];
+    NSData *imageFileData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[tileSet stringByDeletingPathExtension] ofType:[tileSet pathExtension]]];
+    UIImage *img = [[UIImage alloc] initWithData:imageFileData];
 #else
     NSImage *img = [NSImage imageNamed:tileSet];
 #endif

@@ -14,8 +14,13 @@
     }
 
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-    UIImage *image1 = [UIImage imageNamed:@"lookup_soft_elegance_1.png"];
-    UIImage *image2 = [UIImage imageNamed:@"lookup_soft_elegance_2.png"];
+    NSData *imageFileData1 = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"lookup_soft_elegance_1" ofType:@"png"]];
+    UIImage *image1 = [[UIImage alloc] initWithData:imageFileData1];
+//    UIImage *image1 = [UIImage imageNamed:@"lookup_soft_elegance_1.png"];
+
+    NSData *imageFileData2 = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"lookup_soft_elegance_2" ofType:@"png"]];
+    UIImage *image2 = [[UIImage alloc] initWithData:imageFileData2];
+//    UIImage *image2 = [UIImage imageNamed:@"lookup_soft_elegance_2.png"];
 #else
     NSImage *image1 = [NSImage imageNamed:@"lookup_soft_elegance_1.png"];
     NSImage *image2 = [NSImage imageNamed:@"lookup_soft_elegance_2.png"];
