@@ -247,7 +247,7 @@
     
     runAsynchronouslyOnVideoProcessingQueue(^{
         
-        if (MAX(pixelSizeOfImage.width, pixelSizeOfImage.height) > 1000.0)
+        if (1 || MAX(pixelSizeOfImage.width, pixelSizeOfImage.height) > 1000.0)
         {
             [self conserveMemoryForNextFrame];
         }

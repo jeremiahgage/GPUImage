@@ -14,4 +14,6 @@
     GPUImagePicture *lookupImageSource;
 }
 
+-(void)processLookupImage;
+
 @end

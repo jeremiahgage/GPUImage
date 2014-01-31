@@ -67,6 +67,13 @@
     [super prepareForImageCapture];
 }
 
+-(void)processLookupImage
+{
+    [lookupImageSource1 processImage];
+    [lookupImageSource2 processImage];
+}
+
+
 #pragma mark -
 #pragma mark Accessors
 
